@@ -1,42 +1,76 @@
----------------------------------------
-1.06 Final  2013-05-02
----------------------------------------
+<h5>1.07 Beta 2  [NOT RELEASED]</h5>
+<hr>
+- XOOPS 2.5.9, PHP 7 (mamba)
+- Converted to XOOPS 2.5.8 Admin GUI (mamba)
+- removed @version (mamba)
+- PSR-2 code cosmetics (mamba)
+- addNavigation(basename(__FILE__))  (mamba)
+- dirname(__FILE__) to __DIR__ (mamba)
+- replaced < br /> with < br > (mamba)
+- Unnecessary double quotes (mamba)
+- reference mismatch (mamba)
+- Hardening to type safe (mamba)
+- update Help (mamba)
+- changed _handler to Handler (mamba)
+- removed '/' from void HTML elements (&lt;br&gt;, &lt;img&gt;, etc) (mamba)
+- HTML 5: removed 'selected' and 'checked' (mamba)
+- updated file headers for consistency (mamba)
+- renamed several $indexAdmin with $adminObject for consistency (mamba)
+- Updates for PayPal changes (zyspec)
+- added Contributing.md (mamba)
+- moved functions to Utility class (mamba)
+- include_once to require_once (mamba)
+- php-cs-fixer updates (mamba)
+- started conversion to XMF (mamba)
+    &nbsp;&nbsp;- updated addInfoBoxLine entries (mamba)
+    &nbsp;&nbsp;- displayNavigation(basename(__FILE__))  (mamba)
+    &nbsp;&nbsp;- changed to ->displayButton('left') (mamba)
+
+
+<h5>1.07 Beta 1       [2014-04-23]</h5>
+<hr>
+- moved all images, CSS, and JS files to /assets (mamba)
+- renamed .html Smarty templates to .tpl (mamba)
+
+
+<h5>1.06 Final  [2013-05-02]</h5>
+<hr>
 - Converted to XOOPS 2.5.5 Admin GUI (Mamba)
 
----------------------------------------
-1.05 2008-12-08
----------------------------------------
+
+<h5>1.05 [2008-12-08]</h5>
+<hr>
 - updated README
 - updated mymenu
 - added language files
 -- portuguesebr (thx leco1)
 
----------------------------------------
-1.04 2008-12-05
----------------------------------------
+
+<h5>1.04 [2008-12-05]</h5>
+<hr>
 - modified the compatibilities with XCL2.1
 - modified MySQL5 compatibility
 - changed altsys friendly module
 
----------------------------------------
-1.03 2006-07-13
----------------------------------------
+
+<h5>1.03 [2006-07-13]</h5>
+<hr>
 - modified xoops_version.php as hasMain=1 (thx Rollei)
 - added language files
 -- persian (thx voltan) 1.03a
 
----------------------------------------
-1.02 2005-12-03
----------------------------------------
+
+<h5>1.02 [2005-12-03]</h5>
+<hr>
 - updated myblocksadmin 0.41 & mymenu 0.15a
 - updated module icon (thx argon)
 
----------------------------------------
-1.01   2005-07-21
----------------------------------------
+
+<h5>1.01   [2005-07-21]</h5>
+<hr>
 - fixed a bug in JavaScript (thx yamaichi)
 
----------------------------------------
-1.00   2005-05-25
----------------------------------------
+
+<h5>1.00   [2005-05-25]</h5>
+<hr>
 - the 1st release
