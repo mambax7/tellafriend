@@ -28,3 +28,17 @@ define('_MI_TELLAFRIEND_TOOMANY', "Too many mails you've sent, today");
 
 define('_MI_TELLAFRIEND_LOG', 'Log Admin');
 define('_MI_TELLAFRIEND_GROUPADMIN', 'Group admin');
+
+//1.07
+//Help
+define('_MI_TELLAFRIEND_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_TELLAFRIEND_HELP_HEADER', __DIR__.'/help/helpheader.tpl');
+define('_MI_TELLAFRIEND_BACK_2_ADMIN', 'Back to Administration of ');
+define('_MI_TELLAFRIEND_OVERVIEW', 'Overview');
+
+//define('_MI_TELLAFRIEND_HELP_DIR', __DIR__);
+
+//help multi-page
+define('_MI_TELLAFRIEND_DISCLAIMER', 'Disclaimer');
+define('_MI_TELLAFRIEND_LICENSE', 'License');
+define('_MI_TELLAFRIEND_SUPPORT', 'Support');

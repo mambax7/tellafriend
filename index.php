@@ -18,7 +18,7 @@
  */
 
 include __DIR__ . '/../../mainfile.php';
-include __DIR__ . '/include/gtickets.php';
+//include __DIR__ . '/include/gtickets.php';
 
 $myts = MyTextSanitizer::getInstance();
 

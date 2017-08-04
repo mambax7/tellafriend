@@ -21,19 +21,19 @@
 
 $moduleDirName = basename(__DIR__);
 
-$modversion['version']       = 1.07;
-$modversion['module_status'] = 'Beta 1';
-$modversion['release_date']  = '2014/04/23';
-$modversion['name']          = _MI_TELLAFRIEND_MODNAME;
-$modversion['description']   = _MI_TELLAFRIEND_MODDESC;
-$modversion['credits']       = 'PEAK Corp. http://www.peak.ne.jp/';
-$modversion['author']        = 'GIJOE';
-$modversion['help']          = 'page=help';
-$modversion['license']       = 'GNU GPL 2.0 or later';
-$modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
-$modversion['official']      = 0; //1 indicates supported by Xoops CORE Dev Team, 0 means 3rd party supported
-$modversion['image']         = 'assets/images/logoModule.png';
-$modversion['dirname']       = basename(__DIR__);
+$modversion['version']             = 1.07;
+$modversion['module_status']       = 'Beta 1';
+$modversion['release_date']        = '2017/04/23';
+$modversion['name']                = _MI_TELLAFRIEND_MODNAME;
+$modversion['description']         = _MI_TELLAFRIEND_MODDESC;
+$modversion['credits']             = 'PEAK Corp. http://www.peak.ne.jp/';
+$modversion['author']              = 'GIJOE';
+$modversion['help']                = 'page=help';
+$modversion['license']             = 'GNU GPL 2.0 or later';
+$modversion['license_url']         = 'www.gnu.org/licenses/gpl-2.0.html';
+$modversion['official']            = 0; //1 indicates supported by Xoops CORE Dev Team, 0 means 3rd party supported
+$modversion['image']               = 'assets/images/logoModule.png';
+$modversion['dirname']             = basename(__DIR__);
 $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['release_file']        = XOOPS_URL . '/modules/' . $modversion['dirname'] . '/docs/changelog.txt';
@@ -58,6 +58,14 @@ $modversion['adminmenu']   = 'admin/menu.php';
 
 // Menu
 $modversion['hasMain'] = 1;
+
+// ------------------- Help files ------------------- //
+$modversion['helpsection'] = array(
+    ['name' => _MI_TELLAFRIEND_OVERVIEW, 'link' => 'page=help'],
+    ['name' => _MI_TELLAFRIEND_DISCLAIMER, 'link' => 'page=disclaimer'],
+    ['name' => _MI_TELLAFRIEND_LICENSE, 'link' => 'page=license'],
+    ['name' => _MI_TELLAFRIEND_SUPPORT, 'link' => 'page=support'],
+);
 
 // Config Settings
 $modversion['hasconfig'] = 1;
