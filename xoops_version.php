@@ -17,7 +17,7 @@
  * @author         XOOPS Development Team
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 $moduleDirName = basename(__DIR__);
 
@@ -42,7 +42,7 @@ $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array('mysql' => '5.5');
+$modversion['min_db']              = ['mysql' => '5.5'];
 
 // Sql file
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
@@ -60,45 +60,45 @@ $modversion['adminmenu']   = 'admin/menu.php';
 $modversion['hasMain'] = 1;
 
 // ------------------- Help files ------------------- //
-$modversion['helpsection'] = array(
+$modversion['helpsection'] = [
     ['name' => _MI_TELLAFRIEND_OVERVIEW, 'link' => 'page=help'],
     ['name' => _MI_TELLAFRIEND_DISCLAIMER, 'link' => 'page=disclaimer'],
     ['name' => _MI_TELLAFRIEND_LICENSE, 'link' => 'page=license'],
     ['name' => _MI_TELLAFRIEND_SUPPORT, 'link' => 'page=support'],
-);
+];
 
 // Config Settings
 $modversion['hasconfig'] = 1;
 
-$modversion['config'][1] = array(
+$modversion['config'][1] = [
     'name'        => 'max4guest',
     'title'       => '_MI_TELLAFRIEND_MAX4GUEST',
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => '5',
-    'options'     => array()
-);
+    'options'     => []
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'max4user',
     'title'       => '_MI_TELLAFRIEND_MAX4USER',
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => '10',
-    'options'     => array()
-);
+    'options'     => []
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'can_bodyedit',
     'title'       => '_MI_TELLAFRIEND_BODYEDIT',
     'description' => '',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => true,
-    'options'     => array()
-);
+    'options'     => []
+];
 
 // Templates
 $modversion['templates'][1]['file']        = 'tellafriend_form.tpl';

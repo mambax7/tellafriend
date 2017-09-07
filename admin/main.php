@@ -44,7 +44,6 @@ if (!empty($_POST['action'])) {
             $xoopsDB->query("DELETE FROM $log_table WHERE lid='$lid'");
         }
         redirect_header('main.php', 2, _AM_MSG_REMOVED);
-        exit;
     }
 }
 

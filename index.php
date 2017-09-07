@@ -48,7 +48,6 @@ if (!empty($_POST['submit'])) {
         list($count) = $xoopsDB->fetchRow($result);
         if ($count >= $xoopsModuleConfig['max4guest']) {
             redirect_header(XOOPS_URL . '/', 3, _MI_TELLAFRIEND_TOOMANY);
-            exit;
         }
     } elseif (!$xoopsUser->isAdmin()) {
         // uid base restriction for non-admin user
@@ -57,7 +56,6 @@ if (!empty($_POST['submit'])) {
         list($count) = $xoopsDB->fetchRow($result);
         if ($count >= $xoopsModuleConfig['max4user']) {
             redirect_header(XOOPS_URL . '/', 3, _MI_TELLAFRIEND_TOOMANY);
-            exit;
         }
     }
 
@@ -78,7 +76,6 @@ if (!empty($_POST['submit'])) {
         // check if from_email is valid as an email address
         if (!preg_match('/^[\w\-\.]+\@[\w\-]+\.[\w\-\.]+$/', $users_email)) {
             redirect_header($redirect_uri, 3, _MI_TELLAFRIEND_INVALIDMAILFROM);
-            exit;
         }
         $uid = 0;
     }
@@ -89,7 +86,6 @@ if (!empty($_POST['submit'])) {
     // check if users_to is valid as an email address
     if (!preg_match('/^[\w\-\.]+\@[\w\-]+\.[\w\-\.]+$/', $users_to)) {
         redirect_header($redirect_uri, 3, _MI_TELLAFRIEND_INVALIDMAILTO);
-        exit;
     }
 
     $message_body = sprintf(_MI_TELLAFRIEND_MAILBODYNAME, $users_name);

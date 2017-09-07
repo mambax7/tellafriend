@@ -1,6 +1,6 @@
 <?php
 
-defined('XOOPS_ROOT_PATH') || exit('XOOPS Root Path not defined');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 if (empty($moduleDirName)) {
     $moduleDirName = basename(dirname(__DIR__));
@@ -36,19 +36,19 @@ if (!defined('XOOPS_ORETEKI')) {
         if (file_exists(XOOPS_TRUST_PATH . '/libs/altsys/mytplsadmin.php')) {
             // mytplsadmin (TODO check if this module has tplfile)
             $title = defined('_MD_A_MYMENU_MYTPLSADMIN') ? _MD_A_MYMENU_MYTPLSADMIN : 'tplsadmin';
-            array_push($adminObject, array('title' => $title, 'link' => 'admin/index.php?mode=admin&lib=altsys&page=mytplsadmin'));
+            array_push($adminObject, ['title' => $title, 'link' => 'admin/index.php?mode=admin&lib=altsys&page=mytplsadmin']);
         }
 
         if (file_exists(XOOPS_TRUST_PATH . '/libs/altsys/myblocksadmin.php')) {
             // myblocksadmin
             $title = defined('_MD_A_MYMENU_MYBLOCKSADMIN') ? _MD_A_MYMENU_MYBLOCKSADMIN : 'blocksadmin';
-            array_push($adminObject, array('title' => $title, 'link' => 'admin/index.php?mode=admin&lib=altsys&page=myblocksadmin'));
+            array_push($adminObject, ['title' => $title, 'link' => 'admin/index.php?mode=admin&lib=altsys&page=myblocksadmin']);
         }
 
         if (file_exists(XOOPS_TRUST_PATH . '/libs/altsys/mylangadmin.php')) {
             // mylangadmin
             $title = defined('_MD_A_MYMENU_MYLANGADMIN') ? _MD_A_MYMENU_MYLANGADMIN : 'langadmin';
-            array_push($adminObject, array('title' => $title, 'link' => 'admin/index.php?mode=admin&lib=altsys&page=mylangadmin'));
+            array_push($adminObject, ['title' => $title, 'link' => 'admin/index.php?mode=admin&lib=altsys&page=mylangadmin']);
         }
 
         // preferences
@@ -57,39 +57,39 @@ if (!defined('XOOPS_ORETEKI')) {
             if (file_exists(XOOPS_TRUST_PATH . '/libs/altsys/mypreferences.php')) {
                 // mypreferences
                 $title = defined('_MD_A_MYMENU_MYPREFERENCES') ? _MD_A_MYMENU_MYPREFERENCES : _PREFERENCES;
-                array_push($adminObject, array(
+                array_push($adminObject, [
                     'title' => $title,
                     'link'  => 'admin/index.php?mode=admin&lib=altsys&page=mypreferences'
-                ));
+                ]);
             } elseif (defined('XOOPS_CUBE_LEGACY')) {
                 // Cube Legacy without altsys
-                array_push($adminObject, array(
+                array_push($adminObject, [
                     'title' => _PREFERENCES,
                     'link'  => XOOPS_URL . '/modules/legacy/admin/index.php?action=PreferenceEdit&confmod_id=' . $module->getVar('mid')
-                ));
+                ]);
             } else {
                 // system->preferences
-                array_push($adminObject, array(
+                array_push($adminObject, [
                     'title' => _PREFERENCES,
                     'link'  => XOOPS_URL . '/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $module->mid()
-                ));
+                ]);
             }
         }
     } elseif (defined('XOOPS_CUBE_LEGACY')) {
         // Cube Legacy without altsys
         if ($module->getVar('hasconfig')) {
-            array_push($adminObject, array(
+            array_push($adminObject, [
                 'title' => _PREFERENCES,
                 'link'  => XOOPS_URL . '/modules/legacy/admin/index.php?action=PreferenceEdit&confmod_id=' . $module->getVar('mid')
-            ));
+            ]);
         }
     } else {
         // conventinal X2
         if ($module->getVar('hasconfig')) {
-            array_push($adminObject, array(
+            array_push($adminObject, [
                 'title' => _PREFERENCES,
                 'link'  => XOOPS_URL . '/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $module->getVar('mid')
-            ));
+            ]);
         }
     }
 
