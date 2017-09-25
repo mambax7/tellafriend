@@ -118,7 +118,7 @@ if (!defined('XOOPS_ORETEKI')) {
 
     // link conversion from relative to absolute
     foreach (array_keys($adminObject) as $i) {
-        if (stristr($adminmenu[$i]['link'], XOOPS_URL) === false) {
+        if (false === stristr($adminmenu[$i]['link'], XOOPS_URL)) {
             $adminmenu[$i]['link'] = XOOPS_URL . "/modules/$moduleDirName/" . $adminmenu[$i]['link'];
         }
     }

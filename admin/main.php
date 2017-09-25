@@ -32,7 +32,7 @@ $log_table = $xoopsDB->prefix('tellafriend_log');
 
 // UPDATE stage
 if (!empty($_POST['action'])) {
-    if ($_POST['action'] == 'delete' && isset($_POST['ids']) && is_array($_POST['ids'])) {
+    if ('delete' == $_POST['action'] && isset($_POST['ids']) && is_array($_POST['ids'])) {
         // Ticket check
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header(XOOPS_URL . '/', 3, $GLOBALS['xoopsSecurity']->getErrors());
@@ -96,7 +96,7 @@ echo "
 // body of log listing
 $oddeven = 'odd';
 while (list($lid, $uid, $ip, $agent, $mail_fromemail, $mail_to, $timestamp, $uname) = $xoopsDB->fetchRow($prs)) {
-    $oddeven = ($oddeven == 'odd' ? 'even' : 'odd');
+    $oddeven = ('odd' == $oddeven ? 'even' : 'odd');
 
     $ip             = htmlspecialchars($ip, ENT_QUOTES);
     $mail_fromemail = htmlspecialchars($mail_fromemail, ENT_QUOTES);
@@ -106,7 +106,7 @@ while (list($lid, $uid, $ip, $agent, $mail_fromemail, $mail_to, $timestamp, $una
     // make agent shorten
     if (preg_match('/MSIE\s+([0-9.]+)/', $agent, $regs)) {
         $agent_short = 'IE ' . $regs[1];
-    } elseif (stristr($agent, 'Gecko') !== false) {
+    } elseif (false !== stristr($agent, 'Gecko')) {
         $agent_short = strrchr($agent, ' ');
     } else {
         $agent_short = substr($agent, 0, strpos($agent, ' '));
