@@ -19,6 +19,8 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
+require_once __DIR__ . '/preloads/autoloader.php';
+
 $moduleDirName = basename(__DIR__);
 
 $modversion['version']             = 1.07;

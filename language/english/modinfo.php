@@ -42,3 +42,6 @@ define('_MI_TELLAFRIEND_OVERVIEW', 'Overview');
 define('_MI_TELLAFRIEND_DISCLAIMER', 'Disclaimer');
 define('_MI_TELLAFRIEND_LICENSE', 'License');
 define('_MI_TELLAFRIEND_SUPPORT', 'Support');
+
+define('_MI_TELLAFRIEND_HOME', 'Home');
+define('_MI_TELLAFRIEND_ABOUT', 'About');
