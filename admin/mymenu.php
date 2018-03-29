@@ -1,6 +1,6 @@
 <?php
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 if (empty($moduleDirName)) {
     $moduleDirName = basename(dirname(__DIR__));
@@ -53,7 +53,7 @@ if (!defined('XOOPS_ORETEKI')) {
 
         // preferences
         $configHandler = xoops_getHandler('config');
-        if (count($configHandler->getConfigs(new Criteria('conf_modid', $module->mid()))) > 0) {
+        if (count($configHandler->getConfigs(new \Criteria('conf_modid', $module->mid()))) > 0) {
             if (file_exists(XOOPS_TRUST_PATH . '/libs/altsys/mypreferences.php')) {
                 // mypreferences
                 $title = defined('_MD_A_MYMENU_MYPREFERENCES') ? _MD_A_MYMENU_MYPREFERENCES : _PREFERENCES;

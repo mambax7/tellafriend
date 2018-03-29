@@ -17,6 +17,10 @@
  * @author         XOOPS Development Team
  */
 
+use XoopsModules\Tellafriend;
+/** @var Tellafriend\Helper $helper */
+$helper = Tellafriend\Helper::getInstance();
+
 include __DIR__ . '/../../mainfile.php';
 //include __DIR__ . '/include/gtickets.php';
 
@@ -46,7 +50,7 @@ if (!empty($_POST['submit'])) {
         // ip base restriction for guest
         $result = $xoopsDB->query('SELECT count(*) FROM ' . $xoopsDB->prefix('tellafriend_log') . " WHERE ip='{$_SERVER['REMOTE_ADDR']}' AND timestamp > NOW() - INTERVAL 1 DAY");
         list($count) = $xoopsDB->fetchRow($result);
-        if ($count >= $xoopsModuleConfig['max4guest']) {
+        if ($count >= $helper->getConfig('max4guest')) {
             redirect_header(XOOPS_URL . '/', 3, _MI_TELLAFRIEND_TOOMANY);
         }
     } elseif (!$xoopsUser->isAdmin()) {
@@ -54,7 +58,7 @@ if (!empty($_POST['submit'])) {
         $uid    = $xoopsUser->getVar('uid');
         $result = $xoopsDB->query('SELECT count(*) FROM ' . $xoopsDB->prefix('tellafriend_log') . " WHERE uid='$uid' AND timestamp > NOW() - INTERVAL 1 DAY");
         list($count) = $xoopsDB->fetchRow($result);
-        if ($count >= $xoopsModuleConfig['max4user']) {
+        if ($count >= $helper->getConfig('max4user')) {
             redirect_header(XOOPS_URL . '/', 3, _MI_TELLAFRIEND_TOOMANY);
         }
     }
@@ -154,24 +158,24 @@ $comment      = empty($_GET['target_uri']) ? '' : sprintf(_MI_TELLAFRIEND_DEFAUL
 $comment4show = htmlspecialchars($comment, ENT_QUOTES);
 
 if (!is_object($xoopsUser)) {
-    $fromname_text            = new XoopsFormText(_MI_TELLAFRIEND_FORMTHFROMNAME, 'fromName', 30, 100, '');
-    $fromemail_text           = new XoopsFormText(_MI_TELLAFRIEND_FORMTHFROMEMAIL, 'fromEmail', 40, 100, '');
+    $fromname_text            = new \XoopsFormText(_MI_TELLAFRIEND_FORMTHFROMNAME, 'fromName', 30, 100, '');
+    $fromemail_text           = new \XoopsFormText(_MI_TELLAFRIEND_FORMTHFROMEMAIL, 'fromEmail', 40, 100, '');
     $_SESSION['usersSubject'] = $subject;
-    $subject_text             = new XoopsFormLabel(_MI_TELLAFRIEND_FORMTHSUBJ, $subject4show);
+    $subject_text             = new \XoopsFormLabel(_MI_TELLAFRIEND_FORMTHSUBJ, $subject4show);
 } else {
-    $subject_text = new XoopsFormText(_MI_TELLAFRIEND_FORMTHSUBJ, 'usersSubject', 50, 100, $subject4show);
+    $subject_text = new \XoopsFormText(_MI_TELLAFRIEND_FORMTHSUBJ, 'usersSubject', 50, 100, $subject4show);
 }
 
-$to_text = new XoopsFormText(_MI_TELLAFRIEND_FORMTHTO, 'usersTo', 40, 100, '');
+$to_text = new \XoopsFormText(_MI_TELLAFRIEND_FORMTHTO, 'usersTo', 40, 100, '');
 
-$body_label       = new XoopsFormLabel(_MI_TELLAFRIEND_FORMTHBODY, nl2br($comment4show));
-$body_hidden      = new XoopsFormHidden('usersComments', $comment4show);
-$comment_textarea = new XoopsFormTextArea(_MI_TELLAFRIEND_FORMTHBODY, 'usersComments', $comment4show, 10, 40);
+$body_label       = new \XoopsFormLabel(_MI_TELLAFRIEND_FORMTHBODY, nl2br($comment4show));
+$body_hidden      = new \XoopsFormHidden('usersComments', $comment4show);
+$comment_textarea = new \XoopsFormTextArea(_MI_TELLAFRIEND_FORMTHBODY, 'usersComments', $comment4show, 10, 40);
 
 $ticket_hidden = $xoopsGTicket->getTicketXoopsForm(__LINE__);
-$submit_button = new XoopsFormButton('', 'submit', _MI_TELLAFRIEND_BUTTONSEND, 'submit');
+$submit_button = new \XoopsFormButton('', 'submit', _MI_TELLAFRIEND_BUTTONSEND, 'submit');
 
-$contact_form = new XoopsThemeForm(_MI_TELLAFRIEND_FORMTITLE, 'tf_form', 'index.php');
+$contact_form = new \XoopsThemeForm(_MI_TELLAFRIEND_FORMTITLE, 'tf_form', 'index.php');
 $contact_form->addElement($to_text, true);
 
 if (!is_object($xoopsUser)) {
@@ -180,7 +184,7 @@ if (!is_object($xoopsUser)) {
 }
 
 $contact_form->addElement($subject_text);
-if ($xoopsModuleConfig['can_bodyedit']) {
+if ($helper->getConfig('can_bodyedit')) {
     $contact_form->addElement($comment_textarea, true);
 } else {
     $contact_form->addElement($body_label);

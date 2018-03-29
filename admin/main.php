@@ -32,7 +32,7 @@ $log_table = $xoopsDB->prefix('tellafriend_log');
 
 // UPDATE stage
 if (!empty($_POST['action'])) {
-    if ('delete' == $_POST['action'] && isset($_POST['ids']) && is_array($_POST['ids'])) {
+    if ('delete' === $_POST['action'] && isset($_POST['ids']) && is_array($_POST['ids'])) {
         // Ticket check
         if (!$GLOBALS['xoopsSecurity']->check()) {
             redirect_header(XOOPS_URL . '/', 3, $GLOBALS['xoopsSecurity']->getErrors());
@@ -54,7 +54,7 @@ $prs = $xoopsDB->query("SELECT l.lid, l.uid, l.ip, l.agent, l.mail_fromemail, l.
 
 // Page Navigation
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-$nav      = new XoopsPageNav($numrows, $num, $pos, 'pos', "num=$num");
+$nav      = new \XoopsPageNav($numrows, $num, $pos, 'pos', "num=$num");
 $nav_html = $nav->renderNav(10);
 
 // beggining of Output
@@ -95,8 +95,8 @@ echo "
 
 // body of log listing
 $oddeven = 'odd';
-while (list($lid, $uid, $ip, $agent, $mail_fromemail, $mail_to, $timestamp, $uname) = $xoopsDB->fetchRow($prs)) {
-    $oddeven = ('odd' == $oddeven ? 'even' : 'odd');
+while (false !== (list($lid, $uid, $ip, $agent, $mail_fromemail, $mail_to, $timestamp, $uname) = $xoopsDB->fetchRow($prs))) {
+    $oddeven = ('odd' === $oddeven ? 'even' : 'odd');
 
     $ip             = htmlspecialchars($ip, ENT_QUOTES);
     $mail_fromemail = htmlspecialchars($mail_fromemail, ENT_QUOTES);
