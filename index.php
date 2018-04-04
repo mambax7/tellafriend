@@ -64,7 +64,7 @@ if (!empty($_POST['submit'])) {
     }
 
     $redirect_uri = !empty($_SESSION['tellafriend_referer'])
-                    && stristr($_SESSION['tellafriend_referer'], XOOPS_URL) ? $_SESSION['tellafriend_referer'] : XOOPS_URL . '/index.php';
+                    && false !== stripos($_SESSION['tellafriend_referer'], XOOPS_URL) ? $_SESSION['tellafriend_referer'] : XOOPS_URL . '/index.php';
     unset($_SESSION['tellafriend_referer']);
 
     if (is_object($xoopsUser)) {
@@ -172,10 +172,9 @@ $body_label       = new \XoopsFormLabel(_MI_TELLAFRIEND_FORMTHBODY, nl2br($comme
 $body_hidden      = new \XoopsFormHidden('usersComments', $comment4show);
 $comment_textarea = new \XoopsFormTextArea(_MI_TELLAFRIEND_FORMTHBODY, 'usersComments', $comment4show, 10, 40);
 
-$ticket_hidden = $xoopsGTicket->getTicketXoopsForm(__LINE__);
 $submit_button = new \XoopsFormButton('', 'submit', _MI_TELLAFRIEND_BUTTONSEND, 'submit');
 
-$contact_form = new \XoopsThemeForm(_MI_TELLAFRIEND_FORMTITLE, 'tf_form', 'index.php');
+$contact_form = new \XoopsThemeForm(_MI_TELLAFRIEND_FORMTITLE, 'tf_form', 'index.php', 'post', true);
 $contact_form->addElement($to_text, true);
 
 if (!is_object($xoopsUser)) {
@@ -190,7 +189,6 @@ if ($helper->getConfig('can_bodyedit')) {
     $contact_form->addElement($body_label);
     $contact_form->addElement($body_hidden);
 }
-$contact_form->addElement($ticket_hidden);
 $contact_form->addElement($submit_button);
 $contact_form->assign($xoopsTpl);
 include XOOPS_ROOT_PATH . '/footer.php';

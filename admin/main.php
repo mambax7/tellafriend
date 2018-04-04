@@ -106,7 +106,7 @@ while (false !== (list($lid, $uid, $ip, $agent, $mail_fromemail, $mail_to, $time
     // make agent shorten
     if (preg_match('/MSIE\s+([0-9.]+)/', $agent, $regs)) {
         $agent_short = 'IE ' . $regs[1];
-    } elseif (false !== stristr($agent, 'Gecko')) {
+    } elseif (false !== stripos($agent, 'Gecko')) {
         $agent_short = strrchr($agent, ' ');
     } else {
         $agent_short = substr($agent, 0, strpos($agent, ' '));

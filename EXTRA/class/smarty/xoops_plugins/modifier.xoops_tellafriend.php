@@ -1,10 +1,10 @@
 <?php
 function smarty_modifier_xoops_tellafriend($string, $subject='')
 {
-    if (stristr($subject, '%')) {
+    if (false !== stripos($subject, '%')) {
         $subject = rawurldecode($subject) ;
     }
-    if (stristr($string, '%3F')) {
+    if (false !== stripos($string, '%3F')) {
         $string = rawurldecode($string) ;
     }
 

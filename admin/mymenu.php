@@ -108,7 +108,7 @@ if (!defined('XOOPS_ORETEKI')) {
     }
     if (empty($adminMenu_hilighted)) {
         foreach (array_keys($adminObject) as $i) {
-            if (stristr($mymenu_uri, $adminmenu[$i]['link'])) {
+            if (false !== stripos($mymenu_uri, $adminmenu[$i]['link'])) {
                 $adminmenu[$i]['color']          = '#FFCCCC';
                 $GLOBALS['altsysAdminPageTitle'] = $adminmenu[$i]['title'];
                 break;
@@ -118,7 +118,7 @@ if (!defined('XOOPS_ORETEKI')) {
 
     // link conversion from relative to absolute
     foreach (array_keys($adminObject) as $i) {
-        if (false === stristr($adminmenu[$i]['link'], XOOPS_URL)) {
+        if (false === stripos($adminmenu[$i]['link'], XOOPS_URL)) {
             $adminmenu[$i]['link'] = XOOPS_URL . "/modules/$moduleDirName/" . $adminmenu[$i]['link'];
         }
     }
