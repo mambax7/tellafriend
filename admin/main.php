@@ -24,8 +24,8 @@ if (defined('XOOPS_TRUST_PATH') && !empty($_GET['lib'])) {
 }
 
 // GET vars
-$pos = empty($_GET['pos']) ? 0 : (int)$_GET['pos'];
-$num = empty($_GET['num']) ? 20 : (int)$_GET['num'];
+$pos = \Xmf\Request::getInt('pos', 0, 'GET');
+$num = \Xmf\Request::getInt('num', 20, 'GET');
 
 // Table Name
 $log_table = $xoopsDB->prefix('tellafriend_log');
