@@ -17,6 +17,7 @@
  * @author         XOOPS Development Team
  */
 
+use Xmf\Request;
 use XoopsModules\Tellafriend;
 /** @var Tellafriend\Helper $helper */
 $helper = Tellafriend\Helper::getInstance();
@@ -149,7 +150,7 @@ include XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'tellafriend_form.tpl';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
-$_SESSION['tellafriend_referer'] = @$_SERVER['HTTP_REFERER'];
+$_SESSION['tellafriend_referer'] = @Request::getString('HTTP_REFERER', '', 'SERVER');
 
 $subject      = empty($_GET['subject']) ? sprintf(_MI_TELLAFRIEND_DEFAULTSUBJ, $xoopsConfig['sitename']) : $myts->stripSlashesGPC($_GET['subject']);
 $subject4show = htmlspecialchars($subject, ENT_QUOTES);

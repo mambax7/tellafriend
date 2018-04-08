@@ -1,5 +1,7 @@
 <?php
 
+use XoopsModules\Tellafriend;
+
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 if (empty($moduleDirName)) {
@@ -17,12 +19,11 @@ if (!defined('XOOPS_ORETEKI')) {
 
     // load modinfo.php if necessary (judged by a specific constant is defined)
     if (!defined('_MYMENU_CONSTANT_IN_MODINFO') || !defined(_MYMENU_CONSTANT_IN_MODINFO)) {
-        if (file_exists('../language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-            require_once __DIR__ . '/../language/' . $xoopsConfig['language'] . '/modinfo.php';
-        } else {
-            require_once __DIR__ . '/../language/english/modinfo.php';
-        }
+       /** @var Tellafriend\Helper $helper */
+       $helper = Tellafriend\Helper::getInstance();
+       $helper->loadLanguage('main');
     }
+
 
     include __DIR__ . '/menu.php';
 
