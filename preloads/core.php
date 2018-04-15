@@ -20,7 +20,7 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 /**
  * Class TellafriendCorePreload
  */
-class TellafriendCorePreload extends XoopsPreloadItem
+class TellafriendCorePreload extends \XoopsPreloadItem
 {
     // to add PSR-4 autoloader
     /**

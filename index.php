@@ -19,12 +19,12 @@
 
 use Xmf\Request;
 use XoopsModules\Tellafriend;
-/** @var Tellafriend\Helper $helper */
-$helper = Tellafriend\Helper::getInstance();
 
-include __DIR__ . '/../../mainfile.php';
+include  dirname(dirname(__DIR__)) . '/mainfile.php';
 //include __DIR__ . '/include/gtickets.php';
 
+/** @var Tellafriend\Helper $helper */
+$helper = Tellafriend\Helper::getInstance();
 $myts = \MyTextSanitizer::getInstance();
 
 /* if ( ! is_object( $xoopsUser ) ) {
