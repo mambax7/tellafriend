@@ -35,7 +35,7 @@ define('_MI_TELLAFRIEND_GROUPADMIN', 'Group admin');
 
 //1.07
 //Help
-define('_MI_TELLAFRIEND_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_TELLAFRIEND_DIRNAME', basename(dirname(__DIR__, 2)));
 define('_MI_TELLAFRIEND_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_TELLAFRIEND_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_TELLAFRIEND_OVERVIEW', 'Overview');
