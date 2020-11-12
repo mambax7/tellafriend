@@ -26,7 +26,7 @@ namespace XoopsModules\Tellafriend\Common;
 use MyTextSanitizer;
 use XoopsFormDhtmlTextArea;
 use XoopsFormTextArea;
-use XoopsModules\Tellafriend;
+use XoopsModules\Tellafriend\Helper;
 
 /**
  * Class SysUtility
