@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @param string $string
+ * @param string $subject
+ * @return string
+ */
 function smarty_modifier_xoops_tellafriend($string, $subject = '')
 {
     if (false !== mb_stripos($subject, '%')) {
