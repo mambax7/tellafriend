@@ -3,6 +3,10 @@
 define('_MI_TELLAFRIEND_MODNAME', 'Tell a Friend');
 define('_MI_TELLAFRIEND_MODDESC', "MailForm for 'tell a friend' via a customized modifier of Smarty");
 
+// The name of this module
+define('_MI_TELLAFRIEND_NAME', 'Tell a Friend');
+define('_MI_TELLAFRIEND_DESC', "MailForm for 'tell a friend' via a customized modifier of Smarty");
+
 define('_MI_TELLAFRIEND_INVALIDMAILFROM', "An invalid format found in 'From' address");
 define('_MI_TELLAFRIEND_INVALIDMAILTO', "An invalid format found in 'To' address");
 // %s is user's name
