@@ -18,6 +18,7 @@
  */
 
 use XoopsModules\Tellafriend;
+use XoopsModules\Tellafriend\Utility;
 
 //require_once __DIR__ . '/setup.php';
 
@@ -31,7 +32,7 @@ function xoops_module_pre_install_tellafriend(\XoopsModule $module)
 {
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
     /** @var Tellafriend\Utility $utility */
-    $utility      = new \XoopsModules\Tellafriend\Utility();
+    $utility      = new Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
@@ -59,7 +60,7 @@ function xoops_module_install_tellafriend(\XoopsModule $module)
 
     /** @var Tellafriend\Helper $helper */
     $helper       = Tellafriend\Helper::getInstance();
-    $utility      = new Tellafriend\Utility();
+    $utility      = new Utility();
     $configurator = new Tellafriend\Common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');

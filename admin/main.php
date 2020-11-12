@@ -1,5 +1,8 @@
 <?php
 
+use Xmf\Module\Admin;
+use Xmf\Request;
+
 require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 //require_once  dirname(__DIR__) . '/include/gtickets.php';
 require_once __DIR__ . '/admin_header.php';
@@ -25,8 +28,8 @@ if (defined('XOOPS_TRUST_PATH') && !empty($_GET['lib'])) {
 }
 
 // GET vars
-$pos = \Xmf\Request::getInt('pos', 0, 'GET');
-$num = \Xmf\Request::getInt('num', 20, 'GET');
+$pos = Request::getInt('pos', 0, 'GET');
+$num = Request::getInt('num', 20, 'GET');
 
 // Table Name
 $log_table = $xoopsDB->prefix('tellafriend_log');
@@ -62,7 +65,7 @@ $nav_html = $nav->renderNav(10);
 xoops_cp_header();
 //require('./mymenu.php' );
 
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 
 $adminObject->displayNavigation(basename(__FILE__));
 

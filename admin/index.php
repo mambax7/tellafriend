@@ -17,11 +17,13 @@
  * @author       XOOPS Development Team
  */
 
+use Xmf\Module\Admin;
+
 require_once __DIR__ . '/admin_header.php';
 
 xoops_cp_header();
 
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 
 $adminObject->displayNavigation(basename(__FILE__));
 $adminObject->displayIndex();
