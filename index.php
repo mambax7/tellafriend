@@ -23,7 +23,6 @@ use XoopsModules\Tellafriend;
 require_once dirname(dirname(__DIR__)) . '/mainfile.php';
 //require_once __DIR__   . '/include/gtickets.php';
 
-/** @var Tellafriend\Helper $helper */
 $helper = Tellafriend\Helper::getInstance();
 $myts   = \MyTextSanitizer::getInstance();
 

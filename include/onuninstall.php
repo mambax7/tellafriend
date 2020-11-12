@@ -34,10 +34,8 @@ function xoops_module_uninstall_tellafriend(\XoopsModule $module)
 
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    /** @var Tellafriend\Helper $helper */
     $helper = Tellafriend\Helper::getInstance();
 
-    /** @var Tellafriend\Utility $utility */
     $utility = new Tellafriend\Utility();
 
     $success = true;

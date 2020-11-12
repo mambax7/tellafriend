@@ -31,7 +31,6 @@ use XoopsModules\Tellafriend\Utility;
 function xoops_module_pre_install_tellafriend(\XoopsModule $module)
 {
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
-    /** @var Tellafriend\Utility $utility */
     $utility      = new Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -58,7 +57,6 @@ function xoops_module_install_tellafriend(\XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var Tellafriend\Helper $helper */
     $helper       = Tellafriend\Helper::getInstance();
     $utility      = new Utility();
     $configurator = new Tellafriend\Common\Configurator();

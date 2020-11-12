@@ -19,7 +19,6 @@ if (!defined('XOOPS_ORETEKI')) {
 
     // load modinfo.php if necessary (judged by a specific constant is defined)
     if (!defined('_MYMENU_CONSTANT_IN_MODINFO') || !defined(_MYMENU_CONSTANT_IN_MODINFO)) {
-        /** @var Tellafriend\Helper $helper */
         $helper = Tellafriend\Helper::getInstance();
         $helper->loadLanguage('main');
     }
