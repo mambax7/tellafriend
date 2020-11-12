@@ -1,5 +1,6 @@
 <?php
-require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 //require_once  dirname(__DIR__) . '/include/gtickets.php';
 require_once __DIR__ . '/admin_header.php';
 define('_MYMENU_CONSTANT_IN_MODINFO', '_MI_TELLAFRIEND_MODNAME');
@@ -14,11 +15,11 @@ if (defined('XOOPS_TRUST_PATH') && !empty($_GET['lib'])) {
     $page = preg_replace('/[^a-zA-Z0-9_-]/', '', @$_GET['page']);
 
     if (file_exists(XOOPS_TRUST_PATH . '/libs/' . $lib . '/' . $page . '.php')) {
-        include XOOPS_TRUST_PATH . '/libs/' . $lib . '/' . $page . '.php';
+        require XOOPS_TRUST_PATH . '/libs/' . $lib . '/' . $page . '.php';
     } elseif (file_exists(XOOPS_TRUST_PATH . '/libs/' . $lib . '/index.php')) {
-        include XOOPS_TRUST_PATH . '/libs/' . $lib . '/index.php';
+        require XOOPS_TRUST_PATH . '/libs/' . $lib . '/index.php';
     } else {
-        die('wrong request');
+        exit('wrong request');
     }
     exit;
 }
@@ -49,7 +50,7 @@ if (!empty($_POST['action'])) {
 
 // query for listing
 $rs = $xoopsDB->query("SELECT count(lid) FROM $log_table");
-list($numrows) = $xoopsDB->fetchRow($rs);
+[$numrows] = $xoopsDB->fetchRow($rs);
 $prs = $xoopsDB->query("SELECT l.lid, l.uid, l.ip, l.agent, l.mail_fromemail, l.mail_to, UNIX_TIMESTAMP(l.timestamp), u.uname FROM $log_table l LEFT JOIN " . $xoopsDB->prefix('users') . " u ON l.uid=u.uid ORDER BY timestamp DESC LIMIT $pos,$num");
 
 // Page Navigation
@@ -59,7 +60,7 @@ $nav_html = $nav->renderNav(10);
 
 // beggining of Output
 xoops_cp_header();
-//include( './mymenu.php' );
+//require('./mymenu.php' );
 
 $adminObject = \Xmf\Module\Admin::getInstance();
 
@@ -95,7 +96,7 @@ echo "
 
 // body of log listing
 $oddeven = 'odd';
-while (false !== (list($lid, $uid, $ip, $agent, $mail_fromemail, $mail_to, $timestamp, $uname) = $xoopsDB->fetchRow($prs))) {
+while (list($lid, $uid, $ip, $agent, $mail_fromemail, $mail_to, $timestamp, $uname) = $xoopsDB->fetchRow($prs)) {
     $oddeven = ('odd' === $oddeven ? 'even' : 'odd');
 
     $ip             = htmlspecialchars($ip, ENT_QUOTES);
@@ -106,10 +107,10 @@ while (false !== (list($lid, $uid, $ip, $agent, $mail_fromemail, $mail_to, $time
     // make agent shorten
     if (preg_match('/MSIE\s+([0-9.]+)/', $agent, $regs)) {
         $agent_short = 'IE ' . $regs[1];
-    } elseif (false !== stripos($agent, 'Gecko')) {
-        $agent_short = strrchr($agent, ' ');
+    } elseif (false !== mb_stripos($agent, 'Gecko')) {
+        $agent_short = mb_strrchr($agent, ' ');
     } else {
-        $agent_short = substr($agent, 0, strpos($agent, ' '));
+        $agent_short = mb_substr($agent, 0, mb_strpos($agent, ' '));
     }
 
     $agent4disp = htmlspecialchars($agent, ENT_QUOTES);

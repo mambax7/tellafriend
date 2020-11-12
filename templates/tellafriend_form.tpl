@@ -6,7 +6,7 @@
         </tr>
         <!-- start of form elements loop -->
         <{foreach item=element from=$tf_form.elements}>
-            <{if $element.hidden != true}>
+            <{if $element.hidden !== true}>
                 <tr>
                     <td class="head" width="20%"><{$element.caption}></td>
                     <td class="<{cycle values="even,odd"}>"><{$element.body}></td>

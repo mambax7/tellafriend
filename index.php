@@ -11,7 +11,7 @@
 
 /**
  * @copyright      {@link https://xoops.org/ XOOPS Project}
- * @license        {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license        {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package
  * @since
  * @author         XOOPS Development Team
@@ -20,27 +20,29 @@
 use Xmf\Request;
 use XoopsModules\Tellafriend;
 
-include  dirname(dirname(__DIR__)) . '/mainfile.php';
-//include __DIR__ . '/include/gtickets.php';
+require_once dirname(dirname(__DIR__)) . '/mainfile.php';
+//require_once __DIR__   . '/include/gtickets.php';
 
 /** @var Tellafriend\Helper $helper */
 $helper = Tellafriend\Helper::getInstance();
-$myts = \MyTextSanitizer::getInstance();
+$myts   = \MyTextSanitizer::getInstance();
 
 /* if ( ! is_object( $xoopsUser ) ) {
-    redirect_header( XOOPS_URL . '/user.php' , 3 , _NOPERM ) ;
+    redirect_header( XOOPS_URL . '/user.php' , 3 , _NOPERM ) ;if (file_exists(__DIR__ . '/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
+//    require_once __DIR__ . '/language/' . $xoopsConfig['language'] . '/modinfo.php';
+//} else {
+//    require_once __DIR__ . '/language/english/modinfo.php';
+//}
     exit ;
 }*/
 
-if (file_exists(__DIR__ . '/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-    require_once __DIR__ . '/language/' . $xoopsConfig['language'] . '/modinfo.php';
-} else {
-    require_once __DIR__ . '/language/english/modinfo.php';
-}
+//
+
+$moduleDirName = basename(__DIR__);
+xoops_loadLanguage('modinfo', $moduleDirName);
 
 /******************* MAIL PART **********************/
 if (!empty($_POST['submit'])) {
-
     // Ticket Check
     /*  if ( ! $GLOBALS['xoopsSecurity']->check() ) {
             redirect_header(XOOPS_URL.'/',3,$GLOBALS['xoopsSecurity']->getErrors());
@@ -50,7 +52,7 @@ if (!empty($_POST['submit'])) {
     if (!is_object($xoopsUser)) {
         // ip base restriction for guest
         $result = $xoopsDB->query('SELECT count(*) FROM ' . $xoopsDB->prefix('tellafriend_log') . " WHERE ip='{$_SERVER['REMOTE_ADDR']}' AND timestamp > NOW() - INTERVAL 1 DAY");
-        list($count) = $xoopsDB->fetchRow($result);
+        [$count] = $xoopsDB->fetchRow($result);
         if ($count >= $helper->getConfig('max4guest')) {
             redirect_header(XOOPS_URL . '/', 3, _MI_TELLAFRIEND_TOOMANY);
         }
@@ -58,14 +60,14 @@ if (!empty($_POST['submit'])) {
         // uid base restriction for non-admin user
         $uid    = $xoopsUser->getVar('uid');
         $result = $xoopsDB->query('SELECT count(*) FROM ' . $xoopsDB->prefix('tellafriend_log') . " WHERE uid='$uid' AND timestamp > NOW() - INTERVAL 1 DAY");
-        list($count) = $xoopsDB->fetchRow($result);
+        [$count] = $xoopsDB->fetchRow($result);
         if ($count >= $helper->getConfig('max4user')) {
             redirect_header(XOOPS_URL . '/', 3, _MI_TELLAFRIEND_TOOMANY);
         }
     }
 
     $redirect_uri = !empty($_SESSION['tellafriend_referer'])
-                    && false !== stripos($_SESSION['tellafriend_referer'], XOOPS_URL) ? $_SESSION['tellafriend_referer'] : XOOPS_URL . '/index.php';
+                    && false !== mb_stripos($_SESSION['tellafriend_referer'], XOOPS_URL) ? $_SESSION['tellafriend_referer'] : XOOPS_URL . '/index.php';
     unset($_SESSION['tellafriend_referer']);
 
     if (is_object($xoopsUser)) {
@@ -112,29 +114,31 @@ if (!empty($_POST['submit'])) {
     $send_result = $xoopsMailer->send();
 
     if ($send_result) {
-        $xoopsDB->query('INSERT INTO '
-                        . $xoopsDB->prefix('tellafriend_log')
-                        . ' SET '
-                        . "uid='$uid',"
-                        . "ip='{$_SERVER['REMOTE_ADDR']}',"
-                        . "mail_fromname='"
-                        . addslashes($users_name)
-                        . "',"
-                        . "mail_fromemail='"
-                        . addslashes($users_email)
-                        . "',"
-                        . "mail_to='"
-                        . addslashes($users_to)
-                        . "',"
-                        . "mail_subject='"
-                        . addslashes($users_subject)
-                        . "',"
-                        . "mail_body='"
-                        . addslashes($message_body)
-                        . "',"
-                        . "agent='"
-                        . addslashes($_SERVER['HTTP_USER_AGENT'])
-                        . "'");
+        $xoopsDB->query(
+            'INSERT INTO '
+            . $xoopsDB->prefix('tellafriend_log')
+            . ' SET '
+            . "uid='$uid',"
+            . "ip='{$_SERVER['REMOTE_ADDR']}',"
+            . "mail_fromname='"
+            . addslashes($users_name)
+            . "',"
+            . "mail_fromemail='"
+            . addslashes($users_email)
+            . "',"
+            . "mail_to='"
+            . addslashes($users_to)
+            . "',"
+            . "mail_subject='"
+            . addslashes($users_subject)
+            . "',"
+            . "mail_body='"
+            . addslashes($message_body)
+            . "',"
+            . "agent='"
+            . addslashes($_SERVER['HTTP_USER_AGENT'])
+            . "'"
+        );
         redirect_header($redirect_uri, 1, _MI_TELLAFRIEND_MESSAGESENT);
     } else {
         redirect_header($redirect_uri, 3, _MI_TELLAFRIEND_SENDERROR);
@@ -146,7 +150,7 @@ if (!empty($_POST['submit'])) {
 /******************* FORM PART **********************/
 
 //$GLOBALS['xoopsOption']['template_main'] = 'tellafriend_form.html'; //disable module cache
-include XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'tellafriend_form.tpl';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
@@ -192,4 +196,4 @@ if ($helper->getConfig('can_bodyedit')) {
 }
 $contact_form->addElement($submit_button);
 $contact_form->assign($xoopsTpl);
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

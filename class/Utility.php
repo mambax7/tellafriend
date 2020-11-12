@@ -1,19 +1,15 @@
-<?php namespace XoopsModules\Tellafriend;
+<?php
 
-use Xmf\Request;
+namespace XoopsModules\Tellafriend;
+
 use XoopsModules\Tellafriend;
 use XoopsModules\Tellafriend\Common;
+use XoopsModules\Tellafriend\Constants;
 
 /**
  * Class Utility
  */
-class Utility
+class Utility extends Common\SysUtility
 {
-    use Common\VersionChecks; //checkVerXoops, checkVerPhp Traits
-
-    use Common\ServerStats; // getServerStats Trait
-
-    use Common\FilesManagement; // Files Management Trait
-
     //--------------- Custom module methods -----------------------------
 }

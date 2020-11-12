@@ -12,11 +12,10 @@ use XoopsModules\Tellafriend;
 
 /**
  * Prepares system prior to attempting to uninstall module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to uninstall, false if not
  */
-
 function xoops_module_pre_uninstall_tellafriend(\XoopsModule $module)
 {
     // Do some synchronization
@@ -24,27 +23,25 @@ function xoops_module_pre_uninstall_tellafriend(\XoopsModule $module)
 }
 
 /**
- *
  * Performs tasks required during uninstallation of the module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if uninstallation successful, false if not
  */
 function xoops_module_uninstall_tellafriend(\XoopsModule $module)
 {
-//    return true;
+    //    return true;
 
-    $moduleDirName = basename(dirname(__DIR__));
-    $moduleDirNameUpper = strtoupper($moduleDirName);
-     $helper      =Tellafriend\Helper::getInstance();
+    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+    /** @var Tellafriend\Helper $helper */
+    $helper = Tellafriend\Helper::getInstance();
 
     /** @var Tellafriend\Utility $utility */
-    $utility     = new Tellafriend\Utility();
-
+    $utility = new Tellafriend\Utility();
 
     $success = true;
     $helper->loadLanguage('admin');
-
 
     //------------------------------------------------------------------
     // Remove uploads folder (and all subfolders) if they exist

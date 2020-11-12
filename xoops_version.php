@@ -11,13 +11,11 @@
 
 /**
  * @copyright      {@link https://xoops.org/ XOOPS Project}
- * @license        {@link http://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
+ * @license        {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2 or later}
  * @package
  * @since
  * @author         XOOPS Development Team
  */
-
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
@@ -41,8 +39,8 @@ $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['release_file']        = XOOPS_URL . '/modules/' . $modversion['dirname'] . '/docs/changelog.txt';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.5.9';
+$modversion['min_php']             = '7.2';
+$modversion['min_xoops']           = '2.5.10';
 $modversion['min_admin']           = '1.2';
 $modversion['min_db']              = ['mysql' => '5.5'];
 
@@ -79,7 +77,7 @@ $modversion['config'][1] = [
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => '5',
-    'options'     => []
+    'options'     => [],
 ];
 
 $modversion['config'][] = [
@@ -89,7 +87,7 @@ $modversion['config'][] = [
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => '10',
-    'options'     => []
+    'options'     => [],
 ];
 
 $modversion['config'][] = [
@@ -99,7 +97,7 @@ $modversion['config'][] = [
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => true,
-    'options'     => []
+    'options'     => [],
 ];
 
 // Templates

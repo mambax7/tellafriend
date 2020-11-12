@@ -2,7 +2,7 @@
 
 use XoopsModules\Tellafriend;
 
-defined('XOOPS_ROOT_PATH') || die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 if (empty($moduleDirName)) {
     $moduleDirName = basename(dirname(__DIR__));
@@ -14,24 +14,22 @@ if (!defined('XOOPS_ORETEKI')) {
     if (!isset($module) || !is_object($module)) {
         $module = $xoopsModule;
     } elseif (!is_object($xoopsModule)) {
-        die('$xoopsModule is not set');
+        exit('$xoopsModule is not set');
     }
 
     // load modinfo.php if necessary (judged by a specific constant is defined)
     if (!defined('_MYMENU_CONSTANT_IN_MODINFO') || !defined(_MYMENU_CONSTANT_IN_MODINFO)) {
-       /** @var Tellafriend\Helper $helper */
-       $helper = Tellafriend\Helper::getInstance();
-       $helper->loadLanguage('main');
+        /** @var Tellafriend\Helper $helper */
+        $helper = Tellafriend\Helper::getInstance();
+        $helper->loadLanguage('main');
     }
 
-
-    include __DIR__ . '/menu.php';
+    require_once __DIR__ . '/menu.php';
 
     //  array_push( $adminObject , array( 'title' => _PREFERENCES , 'link' => '../system/admin.php?fct=preferences&op=showmod&mod=' . $module->getvar('mid') ) ) ;
     $menuitem_dirname = $module->getVar('dirname');
 
     if (defined('XOOPS_TRUST_PATH')) {
-
         // with XOOPS_TRUST_PATH and altsys
 
         if (file_exists(XOOPS_TRUST_PATH . '/libs/altsys/mytplsadmin.php')) {
@@ -53,49 +51,65 @@ if (!defined('XOOPS_ORETEKI')) {
         }
 
         // preferences
+        /** @var \XoopsConfigHandler $configHandler */
         $configHandler = xoops_getHandler('config');
         if (count($configHandler->getConfigs(new \Criteria('conf_modid', $module->mid()))) > 0) {
             if (file_exists(XOOPS_TRUST_PATH . '/libs/altsys/mypreferences.php')) {
                 // mypreferences
                 $title = defined('_MD_A_MYMENU_MYPREFERENCES') ? _MD_A_MYMENU_MYPREFERENCES : _PREFERENCES;
-                array_push($adminObject, [
-                    'title' => $title,
-                    'link'  => 'admin/index.php?mode=admin&lib=altsys&page=mypreferences'
-                ]);
+                array_push(
+                    $adminObject,
+                    [
+                        'title' => $title,
+                        'link'  => 'admin/index.php?mode=admin&lib=altsys&page=mypreferences',
+                    ]
+                );
             } elseif (defined('XOOPS_CUBE_LEGACY')) {
                 // Cube Legacy without altsys
-                array_push($adminObject, [
-                    'title' => _PREFERENCES,
-                    'link'  => XOOPS_URL . '/modules/legacy/admin/index.php?action=PreferenceEdit&confmod_id=' . $module->getVar('mid')
-                ]);
+                array_push(
+                    $adminObject,
+                    [
+                        'title' => _PREFERENCES,
+                        'link'  => XOOPS_URL . '/modules/legacy/admin/index.php?action=PreferenceEdit&confmod_id=' . $module->getVar('mid'),
+                    ]
+                );
             } else {
                 // system->preferences
-                array_push($adminObject, [
-                    'title' => _PREFERENCES,
-                    'link'  => XOOPS_URL . '/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $module->mid()
-                ]);
+                array_push(
+                    $adminObject,
+                    [
+                        'title' => _PREFERENCES,
+                        'link'  => XOOPS_URL . '/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $module->mid(),
+                    ]
+                );
             }
         }
     } elseif (defined('XOOPS_CUBE_LEGACY')) {
         // Cube Legacy without altsys
         if ($module->getVar('hasconfig')) {
-            array_push($adminObject, [
-                'title' => _PREFERENCES,
-                'link'  => XOOPS_URL . '/modules/legacy/admin/index.php?action=PreferenceEdit&confmod_id=' . $module->getVar('mid')
-            ]);
+            array_push(
+                $adminObject,
+                [
+                    'title' => _PREFERENCES,
+                    'link'  => XOOPS_URL . '/modules/legacy/admin/index.php?action=PreferenceEdit&confmod_id=' . $module->getVar('mid'),
+                ]
+            );
         }
     } else {
         // conventinal X2
         if ($module->getVar('hasconfig')) {
-            array_push($adminObject, [
-                'title' => _PREFERENCES,
-                'link'  => XOOPS_URL . '/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $module->getVar('mid')
-            ]);
+            array_push(
+                $adminObject,
+                [
+                    'title' => _PREFERENCES,
+                    'link'  => XOOPS_URL . '/modules/system/admin.php?fct=preferences&op=showmod&mod=' . $module->getVar('mid'),
+                ]
+            );
         }
     }
 
     $mymenu_uri  = empty($mymenu_fake_uri) ? $_SERVER['REQUEST_URI'] : $mymenu_fake_uri;
-    $mymenu_link = substr(strstr($mymenu_uri, '/admin/'), 1);
+    $mymenu_link = mb_substr(mb_strstr($mymenu_uri, '/admin/'), 1);
 
     // hilight
     foreach (array_keys($adminObject) as $i) {
@@ -109,7 +123,7 @@ if (!defined('XOOPS_ORETEKI')) {
     }
     if (empty($adminMenu_hilighted)) {
         foreach (array_keys($adminObject) as $i) {
-            if (false !== stripos($mymenu_uri, $adminmenu[$i]['link'])) {
+            if (false !== mb_stripos($mymenu_uri, $adminmenu[$i]['link'])) {
                 $adminmenu[$i]['color']          = '#FFCCCC';
                 $GLOBALS['altsysAdminPageTitle'] = $adminmenu[$i]['title'];
                 break;
@@ -119,7 +133,7 @@ if (!defined('XOOPS_ORETEKI')) {
 
     // link conversion from relative to absolute
     foreach (array_keys($adminObject) as $i) {
-        if (false === stripos($adminmenu[$i]['link'], XOOPS_URL)) {
+        if (false === mb_stripos($adminmenu[$i]['link'], XOOPS_URL)) {
             $adminmenu[$i]['link'] = XOOPS_URL . "/modules/$moduleDirName/" . $adminmenu[$i]['link'];
         }
     }
