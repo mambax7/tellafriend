@@ -73,11 +73,11 @@ if (!empty($_POST['submit'])) {
     if (is_object($xoopsUser)) {
         $users_name    = $xoopsUser->getVar('uname');
         $users_email   = $xoopsUser->getVar('email');
-        $users_subject = xoops_substr($myts->stripSlashesGPC($_POST['usersSubject']), 0, 200, '');
+        $users_subject = xoops_substr(($_POST['usersSubject']), 0, 200, '');
         $uid           = $xoopsUser->getVar('uid');
     } else {
-        $users_name    = xoops_substr($myts->stripSlashesGPC($_POST['fromName']), 0, 200, '');
-        $users_email   = xoops_substr($myts->stripSlashesGPC($_POST['fromEmail']), 0, 200, '');
+        $users_name    = xoops_substr(($_POST['fromName']), 0, 200, '');
+        $users_email   = xoops_substr(($_POST['fromEmail']), 0, 200, '');
         $users_subject = $_SESSION['usersSubject'];
         unset($_SESSION['usersSubject']);
         // check if from_email is valid as an email address
@@ -87,8 +87,8 @@ if (!empty($_POST['submit'])) {
         $uid = 0;
     }
 
-    $users_to       = xoops_substr($myts->stripSlashesGPC($_POST['usersTo']), 0, 200, '');
-    $users_comments = xoops_substr($myts->stripSlashesGPC($_POST['usersComments']), 0, 4096, '');
+    $users_to       = xoops_substr(($_POST['usersTo']), 0, 200, '');
+    $users_comments = xoops_substr(($_POST['usersComments']), 0, 4096, '');
 
     // check if users_to is valid as an email address
     if (!preg_match('/^[\w\-\.]+\@[\w\-]+\.[\w\-\.]+$/', $users_to)) {
@@ -156,10 +156,10 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 $_SESSION['tellafriend_referer'] = @Request::getString('HTTP_REFERER', '', 'SERVER');
 
-$subject      = empty($_GET['subject']) ? sprintf(_MI_TELLAFRIEND_DEFAULTSUBJ, $xoopsConfig['sitename']) : $myts->stripSlashesGPC($_GET['subject']);
+$subject      = empty($_GET['subject']) ? sprintf(_MI_TELLAFRIEND_DEFAULTSUBJ, $xoopsConfig['sitename']) : ($_GET['subject']);
 $subject4show = htmlspecialchars($subject, ENT_QUOTES);
 
-$comment      = empty($_GET['target_uri']) ? '' : sprintf(_MI_TELLAFRIEND_DEFAULTBODY, $myts->stripSlashesGPC($_GET['target_uri']));
+$comment      = empty($_GET['target_uri']) ? '' : sprintf(_MI_TELLAFRIEND_DEFAULTBODY, ($_GET['target_uri']));
 $comment4show = htmlspecialchars($comment, ENT_QUOTES);
 
 if (!is_object($xoopsUser)) {
